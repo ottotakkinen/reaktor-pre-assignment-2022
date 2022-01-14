@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import getWinner from '../utils/getWinner';
-import getMostPlayed from '../utils/getMostPlayed';
+import PlayerStats from '../components/PlayerStats';
 
 const Home = () => {
   const [history, setHistory] = useState({});
@@ -43,47 +42,17 @@ const Home = () => {
               type="text"
               onChange={(e) => setPlayerInput(e.target.value)}
             />
-            <button onClick={getHistory}>Search</button>
+            <button type="submit" onClick={getHistory}>
+              Search
+            </button>
           </form>
 
           {history.data && (
-            <div>
-              <button onClick={getMoreHistory}>Load more</button>
-              <p>In the last {history.data.length} games:</p>
-              <p>
-                {player} played{' '}
-                {
-                  history?.data?.filter(
-                    (game) =>
-                      game.playerA.name === player ||
-                      game.playerB.name === player
-                  ).length
-                }{' '}
-                games.
-              </p>
-              <p>
-                Winrate:{' '}
-                {`${
-                  Math.floor(
-                    (history.data.reduce((sum, game) => {
-                      const winner = getWinner(game);
-                      if (winner === player) {
-                        return sum + 1;
-                      } else {
-                        return sum;
-                      }
-                    }, 0) /
-                      history?.data?.filter(
-                        (game) =>
-                          game.playerA.name === player ||
-                          game.playerB.name === player
-                      ).length) *
-                      10000
-                  ) / 100
-                }%`}
-              </p>
-              <p>Most played: {getMostPlayed(history.data, player)}</p>
-            </div>
+            <PlayerStats
+              games={history.data}
+              player={player}
+              getMoreHistory={getMoreHistory}
+            />
           )}
           {/* {history?.data
             ?.filter(
