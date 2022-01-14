@@ -9,9 +9,9 @@ const getWinner = (game) => {
     (a === 'SCISSORS' && b === 'PAPER') ||
     (a === 'PAPER' && b === 'ROCK')
   ) {
-    return 'A';
+    return game.playerA.name;
   } else {
-    return 'B';
+    return game.playerB.name;
   }
 };
 
