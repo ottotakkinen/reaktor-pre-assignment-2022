@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import getWinner from '../utils/getWinner';
 import getMostPlayed from '../utils/getMostPlayed';
@@ -6,16 +6,14 @@ import getMostPlayed from '../utils/getMostPlayed';
 import styles from '../styles/PlayerStats.module.css';
 
 const PlayerStats = ({ games, player, getMoreHistory }) => {
-  const [maxHeight, setMaxHeight] = useState(0);
-
-  useEffect(() => {
-    setMaxHeight(1000);
-  }, []);
+  if (!games) {
+    return <div className={`${styles.main} ${styles.collapsed}`}></div>;
+  }
 
   return (
-    <div className={styles.main} style={{ maxHeight: `${maxHeight}px` }}>
+    <div className={styles.main}>
       <button onClick={getMoreHistory}>Load more</button>
-      <p>In the last {games.length} games:</p>
+      <p>In the last {games?.length} games:</p>
       <p>
         {player} played{' '}
         {

@@ -1,0 +1,4 @@
+.main {
+  overflow-y: hidden;
+  transition: max-height 1s ease;
+}

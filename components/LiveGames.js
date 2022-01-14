@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import styles from '../styles/LiveGames.module.css';
+
 const WS_URL = 'wss://bad-api-assignment.reaktor.com/rps/live';
 
 const MOCK_GAME = {
@@ -12,6 +14,11 @@ const MOCK_GAME = {
 
 const LiveGames = () => {
   const [games, setGames] = useState([MOCK_GAME]);
+  const [opacity, setOpacity] = useState(0);
+
+  useEffect(() => {
+    setOpacity(1);
+  }, []);
 
   useEffect(() => {
     const ws = new WebSocket(WS_URL);
@@ -34,18 +41,22 @@ const LiveGames = () => {
             game.gameId === gameData.gameId ? gameData : game
           )
         );
-        // setInterval(() => {
-        //   setGames((prev) =>
-        //     prev.filter((game) => game.gameId !== gameData.gameId)
-        //   );
-        // }, 5000);
+        setInterval(() => {
+          setGames((prev) =>
+            prev.filter((game) => game.gameId !== gameData.gameId)
+          );
+        }, 5000);
       }
     };
   }, []);
   return (
-    <div>
+    <React.Fragment>
       {games.map((game) => (
-        <div key={game.gameId}>
+        <div
+          className={styles.card}
+          style={{ opacity: `${opacity}` }}
+          key={game.gameId}
+        >
           <span>{game.playerA.name}</span>
           <span>{game.playerA?.played ? game.playerA.played : 'Loader'}</span>
           <span>vs</span>
@@ -53,7 +64,7 @@ const LiveGames = () => {
           <span>{game.playerB.name}</span>
         </div>
       ))}
-    </div>
+    </React.Fragment>
   );
 };
 

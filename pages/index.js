@@ -38,36 +38,29 @@ const Home = () => {
         <h1>Rock Paper Scissors</h1>
       </header>
       <main>
-        <section>
-          <h2>Player search</h2>
-          <form>
-            <input
-              type="text"
-              onChange={(e) => setPlayerInput(e.target.value)}
-              value={player ? player : 'Ukko Järvinen'}
-            />
-            <button type="submit" onClick={getHistory}>
-              Search
-            </button>
-          </form>
-
-          {history.data && (
-            <PlayerStats
-              games={history.data}
-              player={player}
-              getMoreHistory={getMoreHistory}
-            />
-          )}
-          {/* {history?.data
-            ?.filter(
-              (game) =>
-                game.playerA.name === player || game.playerB.name === player
-            )
-            .map((game) => (
-              <p key={game.gameId}>{game.gameId}</p>
-            ))} */}
+        <section className={styles.search}>
+          <div className={styles.searchContainer}>
+            <h2>Player search</h2>
+            <form>
+              <input
+                type="text"
+                onChange={(e) => setPlayerInput(e.target.value)}
+                value={player ? player : 'Ukko Järvinen'}
+              />
+              <button type="submit" onClick={getHistory}>
+                Search
+              </button>
+            </form>
+            {history.data && (
+              <PlayerStats
+                games={history.data}
+                player={player}
+                getMoreHistory={getMoreHistory}
+              />
+            )}
+          </div>
         </section>
-        <section>
+        <section className={styles.live}>
           <h2>Live games</h2>
           <LiveGames />
         </section>
