@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Reaktor Pre-Assignment 2022 - Rock Paper Scissors
 
-## Getting Started
+Reaktor's pre-assignment 2022 was to create a Rock Paper Scissors website. The requirements were to show live games using the WebSocket API and enable to user to search for players. After searching, the user should see the number of games played, winrate and most played hand.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Live Site
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is live on Vercel here:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+[https://reaktor-pre-assignment-2022.vercel.app/](https://reaktor-pre-assignment-2022.vercel.app/ "Live Site")
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Technologies
 
-## Learn More
+Next.js  
+axios  
+CSS Modules
 
-To learn more about Next.js, take a look at the following resources:
+## About
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The website consist of two sections: Player search and Live games. The player search allows users to search for a player to show more stats. As there are a lot of games already in the database, the user can load more games via a button. The live games section handles websocket games to display ongoing games and after they are resolved, the results.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The live games section's player names are clickable to instantly search for that player.
 
-## Deploy on Vercel
+## Things I learned
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- The API layer in Next.js
+- Cursor based pagination and the difficulties when there are a lot of pages
+- Recursively calling 
+- Animating container height when child elements are added in React
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Todo
+
+- Closing the player search 
+- Making the focusable Live game players also work with the enter key (now only clickable)
+
