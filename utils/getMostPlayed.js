@@ -11,7 +11,6 @@ const getMostPlayed = (games, player) => {
   });
 
   const mostPlayed = mode(playedArray);
-  console.log(mostPlayed);
   return mostPlayed;
 };
 

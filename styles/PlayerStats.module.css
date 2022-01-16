@@ -1,4 +1,42 @@
 .main {
   overflow-y: hidden;
   transition: max-height 1s ease;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.statCardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+  margin-top: 1em;
+}
+
+.statCard {
+  padding: 0 1em;
+  /* border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 0.5em; */
+}
+
+.highlight {
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.button {
+  border: none;
+  text-decoration: underline;
+  color: var(--clr-primary);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .highlight {
+    font-size: 1rem;
+  }
+  .statCardContainer {
+    gap: 0.5em;
+  }
 }

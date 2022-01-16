@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import PlayerStats from '../components/PlayerStats';
@@ -9,27 +9,37 @@ import styles from '../styles/Home.module.css';
 const Home = () => {
   const [history, setHistory] = useState({});
   const [player, setPlayer] = useState('');
-  const [playerInput, setPlayerInput] = useState();
+  const [playerInput, setPlayerInput] = useState('');
 
-  const getHistory = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setPlayer(playerInput ? playerInput : 'Ukko Järvinen');
-    if (!history.data) {
-      const result = await axios.get(`${window.location.origin}/api/history`);
-      setHistory({ data: result.data.data, cursor: result.data.cursor });
-    }
+    setPlayer(playerInput);
   };
+
+  useEffect(() => {
+    const getHistory = async () => {
+      if (!history.data) {
+        const result = await axios.get(`${window.location.origin}/api/history`);
+        setHistory({ data: result.data.data, cursor: result.data.cursor });
+      }
+    };
+    getHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [player]);
 
   const getMoreHistory = async () => {
     const result = await axios.get(
-      `${window.location.origin}/api/history?cursor=${history.cursor}`
+      `${window.location.origin}/api/history?cursor=${history.cursor}&limit=5000`
     );
-    console.log(history);
-    console.log(result.data);
     setHistory((prev) => ({
       data: [...prev.data, ...result.data.data],
       cursor: result.data.cursor,
     }));
+  };
+
+  const handleLiveGameLinks = (player) => {
+    setPlayer(player);
+    setPlayerInput(player);
   };
 
   return (
@@ -41,17 +51,17 @@ const Home = () => {
         <section className={styles.search}>
           <div className={styles.searchContainer}>
             <h2>Player search</h2>
-            <form>
+            <form className={styles.searchForm}>
               <input
                 type="text"
                 onChange={(e) => setPlayerInput(e.target.value)}
-                value={player ? player : 'Ukko Järvinen'}
+                value={playerInput}
               />
-              <button type="submit" onClick={getHistory}>
+              <button type="submit" onClick={handleSubmit}>
                 Search
               </button>
             </form>
-            {history.data && (
+            {player && (
               <PlayerStats
                 games={history.data}
                 player={player}
@@ -62,7 +72,7 @@ const Home = () => {
         </section>
         <section className={styles.live}>
           <h2>Live games</h2>
-          <LiveGames />
+          <LiveGames setPlayer={handleLiveGameLinks} />
         </section>
       </main>
     </React.Fragment>

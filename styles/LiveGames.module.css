@@ -7,6 +7,32 @@
   border: 1px solid rgba(0, 0, 0, 0.7);
   padding: 0.5em 1em;
   margin-bottom: 0.25em;
+}
 
-  transition: opacity 0.5s ease;
+.card > span {
+  flex-basis: 20%;
+  text-align: center;
+}
+
+.card > span:last-child {
+  text-align: end;
+}
+
+.card > span:first-child {
+  text-align: start;
+}
+
+.playerName {
+  text-decoration: underline;
+}
+
+.playerName:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .card > span {
+    font-size: 0.75rem;
+  }
 }

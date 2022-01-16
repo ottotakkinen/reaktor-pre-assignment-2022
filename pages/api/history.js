@@ -1,24 +1,21 @@
 import axios from 'axios';
 const BASE_URL = 'https://bad-api-assignment.reaktor.com';
 
-const test_player = 'Ukko Järvinen';
-
 const handler = async (req, res) => {
+  console.log(req.query);
   const result = await getHistory(
     [],
-    req.query.cursor ? req.query.cursor : undefined
+    req.query.cursor ? req.query.cursor : undefined,
+    req.query.limit ? req.query.limit : undefined
   );
-  console.log(result.data.length);
-  console.log(result.cursor);
   res.status(200).json(result);
 };
 
-const getHistory = async (history = [], cursor = undefined) => {
+const getHistory = async (history = [], cursor = undefined, limit = 1000) => {
   if (!cursor && history.length === 0) {
     const result = await axios.get(`${BASE_URL}/rps/history`);
     history = [...result.data.data];
-    // console.log(result.data.cursor);
-    return getHistory(history, result.data.cursor);
+    return getHistory(history, result.data.cursor, limit);
   }
   if (cursor) {
     const result = await axios.get(`${BASE_URL}${cursor}`);
@@ -27,10 +24,10 @@ const getHistory = async (history = [], cursor = undefined) => {
     history = [...history, ...result.data.data];
     console.log(history.length);
 
-    if (history.length > 2000) {
+    if (history.length > limit) {
       return { data: history, cursor: result.data.cursor };
     }
-    return getHistory(history, result.data.cursor);
+    return getHistory(history, result.data.cursor, limit);
   }
 };
 

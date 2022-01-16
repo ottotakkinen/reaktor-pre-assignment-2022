@@ -25,11 +25,42 @@
   flex-direction: column;
 
   border-radius: 1em;
+  max-width: 96vw;
 
-  padding: 2em 4em;
+  padding: 1.5em 3em;
   background-color: var(--clg-bg-light);
 
   transition: all 0.5s;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.searchForm > input,
+.searchForm > button {
+  border: 1px solid var(--clr-bg-dark);
+  padding: 0.5em 1em;
+  height: 2rem;
+}
+
+.searchForm > input {
+  border-radius: 0.5em 0 0em 0.5em;
+}
+.searchForm > input:focus {
+  border: 2px solid tomato;
+}
+
+.searchForm > button {
+  border-radius: 0 0.5em 0.5em 0;
+  background-color: var(--clr-primary);
+  color: var(--clg-bg-light);
+}
+.searchForm > button:hover {
+  opacity: 0.9;
 }
 
 .live {
