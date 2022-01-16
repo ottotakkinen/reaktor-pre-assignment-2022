@@ -26,7 +26,7 @@ The live games section's player names are clickable to instantly search for that
 
 - The API layer in Next.js
 - Cursor based pagination and the difficulties when there are a lot of pages
-- Recursively calling 
+- Recursively calling a cursor based API up to a limit of results
 - Animating container height when child elements are added in React
 
 ## Todo
